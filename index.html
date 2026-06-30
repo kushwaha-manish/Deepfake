@@ -1,543 +1,898 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manish Kushwaha | Portfolio</title>
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TruthLens — Deepfake Detection Platform</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAVBAR -->
-<header class="navbar" id="navbar">
-  <div class="nav-inner">
-    <a href="#home" class="logo">Portfolio</a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#home" class="active">Home</a>
-      <a href="#explore">Explore</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#process">Process</a>
-      <a href="#projects">Projects</a>
-      <a href="#milestones">Milestones</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="resume-btn" id="resumeBtn">Resume ⤓</button>
-    <button class="hamburger" id="hamburger" aria-label="menu">
-      <span></span><span></span><span></span>
-    </button>
+ 
+  <!-- Noise texture overlay -->
+  <div class="noise-overlay"></div>
+ 
+  <!-- Custom Cursor -->
+  <div class="cursor-outer" id="cursorOuter">
+    <div class="cursor-ring"></div>
   </div>
-</header>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <canvas class="constellation" id="constellation"></canvas>
-  <div class="hero-bg"></div>
-  <div class="float-chip chip-1">Passionated</div>
-  <div class="float-chip chip-2"> Project Builder</div>
-  <div class="float-chip chip-3">AI Enthusiast</div>
-  <div class="float-chip chip-4"> Conistent</div>
-  <div class="float-chip chip-5"> Backend Developer</div>
-  
-
-  <div class="hero-content">
-    <div class="status-badge"><span class="dot-pulse"></span> Open to Internships — 2026</div>
-    <p class="eyebrow">Hey there! My name is</p>
-    <h1 class="hero-name">Manish<br><span class="accent">Kushwaha</span></h1>
-    <h2 class="hero-role">CSE Undergraduate · Building in Public</h2>
-    <p class="hero-desc">2nd year B.Tech CSE student at MIT ADT University, Pune. Building real products like an anonymous Telegram bot, sharpening DSA on LeetCode &amp; CodeChef, and learning cloud along the way — consistency over everything.</p>
-    <div class="pill-row">
-      <span class="pill">🏆 CGPA 8.14</span>
-      <span class="pill">💻 Build</span>
-      <span class="pill">📈 Improve</span>
-    </div>
-    <div class="cta-row">
-      <a href="#explore" class="btn btn-primary" id="downloadResume">⤓ Download Resume</a>
-      <a href="#projects" class="btn btn-outline">🚀 View Projects</a>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat-item">
-        <div class="stat-num" data-target="8.14" data-decimal="true">0</div>
-        <div class="stat-label">CGPA in FY</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="1">0</div>
-        <div class="stat-label">Years as CR</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="1">0</div>
-        <div class="stat-label">Live Bot Shipped</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="87">0</div>
-        <div class="stat-label">% in 10th Grade</div>
+  <div class="cursor-dot" id="cursorDot"></div>
+ 
+  <!-- Page transition flash -->
+  <div class="page-flash" id="pageFlash"></div>
+ 
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="var(--accent)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" fill="var(--accent)"/>
+            <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-pulse"></div>
+        </span>
+        TruthLens
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#detect" class="nav-link">Detect</a></li>
+        <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+        <li><a href="#get-help" class="nav-link">Get Help</a></li>
+        <li><a href="#students" class="nav-link">For Students</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#detect" class="btn-nav-primary">
+          <span>Analyze Media</span>
+          <span class="btn-shimmer"></span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
-  </div>
-
-  <div class="orbit-wrap">
-    <div class="orbit-scene">
-      <div class="orbit-core">{ }</div>
-      <div class="orbit-ring ring-1">
-        <span class="orbit-icon i1">🐍</span>
-        <span class="orbit-icon i2">⌨️</span>
-      </div>
-      <div class="orbit-ring ring-2">
-        <span class="orbit-icon i3">☕</span>
-        <span class="orbit-icon i4">🤖</span>
-      </div>
-      <div class="orbit-ring ring-3">
-        <span class="orbit-icon i5">☁️</span>
-        <span class="orbit-icon i6">⚛️</span>
-      </div>
+  </nav>
+ 
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+ 
+    <!-- 3D Globe -->
+    <div class="hero-globe-wrap" id="heroGlobe">
+      <canvas id="globeCanvas"></canvas>
     </div>
-  </div>
-
-  <div class="scroll-hint">⌄</div>
-</section>
-
-<div class="marquee">
-  <div class="marquee-track">
-    <span>DATA STRUCTURES</span><span>•</span>
-    <span>ALGORITHMS</span><span>•</span>
-    <span>PYTHON</span><span>•</span>
-    <span>TELEGRAM BOT API</span><span>•</span>
-    <span>JAVASCRIPT</span><span>•</span>
-    <span>AWS CLOUD</span><span>•</span>
-    <span>COMPETITIVE PROGRAMMING</span><span>•</span>
-    <span>GIT &amp; GITHUB</span><span>•</span>
-    <span>DATA STRUCTURES</span><span>•</span>
-    <span>ALGORITHMS</span><span>•</span>
-    <span>PYTHON</span><span>•</span>
-    <span>TELEGRAM BOT API</span><span>•</span>
-    <span>JAVASCRIPT</span><span>•</span>
-    <span>AWS CLOUD</span><span>•</span>
-    <span>COMPETITIVE PROGRAMMING</span><span>•</span>
-    <span>GIT &amp; GITHUB</span><span>•</span>
-  </div>
-</div>
-
-<!-- EXPLORE / TERMINAL SECTION (mirrors "Upload & Analyze") -->
-<section class="explore" id="explore">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">Core Feature</span>
-      <h2 class="section-title">Run a Quick Profile Scan</h2>
-      <p class="section-desc">A live look at where I stand right now — academics, skills and momentum, compiled in real time.</p>
+ 
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-orb orb-4"></div>
     </div>
-
-    <div class="terminal-card">
-      <div class="terminal-bar">
-        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-        <span class="terminal-title">profile_scan.sh</span>
-      </div>
-      <div class="terminal-body" id="terminalBody">
-        <p class="t-line" data-text="$ initializing profile scan..."></p>
-        <p class="t-line" data-text="> loading academic record... CGPA 8.14"></p>
-        <p class="t-line" data-text="> verifying leadership roles... CR x2 found"></p>
-        <p class="t-line" data-text="> scanning shipped projects... Anonymous_MITians_Bot [LIVE]"></p>
-        <p class="t-line" data-text="> checking consistency metrics... DSA practice [ACTIVE]"></p>
-        <p class="t-line accent-line" data-text="> STATUS: READY TO BUILD ✓"></p>
-      </div>
-    </div>
-
-    <div class="scan-results">
-      <div class="scan-card">
-        <div class="scan-label">Profile Verdict</div>
-        <div class="scan-value accent">Consistent Builder</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-label">Confidence Score</div>
-        <div class="confidence-bar"><div class="confidence-fill" id="confidenceFill"></div></div>
-        <div class="scan-value-small">High commitment · 92%</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-label">Currently Working On</div>
-        <div class="scan-value-small">DSA · Cloud (AWS) · CP Rating</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="section-inner about-grid">
-    <div class="about-left">
-      <div class="about-photo">
-        <div class="avatar-circle">👉</div>
-      </div>
-      <div class="json-card">
-        <div class="terminal-bar small">
-          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span class="terminal-title">profile.json</span>
+ 
+    <!-- 3D floating cards -->
+    <div class="hero-floaters" id="heroFloaters">
+      <div class="float-card fc-1" style="--delay:0s">
+        <div class="fc-body">
+          <span class="fc-dot safe"></span>
+          <span>Authentic Media</span>
         </div>
-        <pre class="json-body">{
-  "name": "Manish Kushwaha",
-  "role": "CSE Undergraduate",
-  "year": 2,
-  "cgpa": 8.14,
-  "roles": ["Class Representative",
-            "Campus Ambassador - AIBL"],
-  "shipped": ["Anonymous MITians Bot"],
-  "learning": ["DSA", "AWS", "System Design"]
-}</pre>
+        <div class="fc-bar"><div class="fc-bar-fill safe-fill" style="width:92%"></div></div>
+      </div>
+      <div class="float-card fc-2" style="--delay:0.4s">
+        <div class="fc-body">
+          <span class="fc-dot danger"></span>
+          <span>Deepfake Detected</span>
+        </div>
+        <div class="fc-bar"><div class="fc-bar-fill danger-fill" style="width:87%"></div></div>
+      </div>
+      <div class="float-card fc-3" style="--delay:0.8s">
+        <div class="fc-body">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--accent)" stroke-width="2"/></svg>
+          <span>98.4% Accuracy</span>
+        </div>
+      </div>
+      <div class="float-card fc-4" style="--delay:1.2s">
+        <div class="fc-body">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="var(--accent)" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>GAN Forensics</span>
+        </div>
+      </div>
+      <!-- Extra floating cards -->
+      <div class="float-card fc-5" style="--delay:1.6s">
+        <div class="fc-body">
+          <span class="fc-dot warn"></span>
+          <span>Neural Analysis</span>
+        </div>
       </div>
     </div>
-    <div class="about-text">
-      <span class="eyebrow-pill">ABOUT ME</span>
-      <h2 class="section-title">Second-Year CSE Student, <span class="accent">Building Real Things</span></h2>
-      <p class="section-desc">
-        I'm a second-year B.Tech Computer Science Engineering student at MIT ADT University, Pune, currently maintaining an 8.14 CGPA. I served as Class Representative for two consecutive years and currently serve as Campus Ambassador for AIBL (AI for Better Life). I'm sharpening my DSA and competitive programming on LeetCode and CodeChef, while building real projects, growing my network on campus, and learning cloud technologies like AWS.
+ 
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-live"></span>
+        AI-Powered Detection — Free &amp; Instant
+        <span class="badge-tag">v2.1</span>
+      </div>
+ 
+      <h1 class="hero-headline">
+        <span class="hl-line" style="--i:0">Detect Deepfakes</span><br/>
+        <span class="hl-line headline-accent" style="--i:1">Instantly with AI</span>
+      </h1>
+ 
+      <!-- Animated type-cycle below headline -->
+      <div class="hero-type-cycle">
+        <span>Powered by</span>
+        <div class="type-words">
+          <span class="tw active">GAN Forensics</span>
+          <span class="tw">Facial Analysis</span>
+          <span class="tw">Frequency Domain</span>
+          <span class="tw">Neural Networks</span>
+        </div>
+      </div>
+ 
+      <p class="hero-sub">
+        Analyze images and videos for AI manipulation with our forensic detection engine.
+        Understand your results — and get expert guidance if you need it.
       </p>
-      <div class="about-cards">
-        <div class="about-card">
-          <div class="card-icon">🎓</div>
-          <h3>Class Representative</h3>
-          <p>Led and represented my class for two consecutive years, coordinating between students and faculty.</p>
-        </div>
-        <div class="about-card">
-          <div class="card-icon">🤝</div>
-          <h3>Campus Ambassador</h3>
-          <p>Representing AIBL (AI for Better Life) on campus, driving AI awareness and student engagement.</p>
-        </div>
-        <div class="about-card">
-          <div class="card-icon">🤖</div>
-          <h3>Builder</h3>
-          <p>Built and shipped an anonymous Telegram bot for MITians, handling logic, hosting and iteration end-to-end.</p>
-        </div>
-        <div class="about-card">
-          <div class="card-icon">🧠</div>
-          <h3>DSA in Progress</h3>
-          <p>Actively solving on LeetCode and CodeChef, building consistency in problem solving and competitive programming.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="skills" id="skills">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">My Toolkit</span>
-      <h2 class="section-title">Technology Stack</h2>
-      <p class="section-desc">Technologies and tools I'm learning and building with right now.</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="card-icon">☕</div>
-        <h3>Core Programming</h3>
-        <p>Building a strong foundation in problem solving and data structures.</p>
-        <div class="tags">
-          <span>C++</span><span>Python</span><span>Java</span><span>DSA</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="70"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="card-icon">&lt;/&gt;</div>
-        <h3>Web Development</h3>
-        <p>Creating responsive, modern interfaces and learning the full stack.</p>
-        <div class="tags">
-          <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Git</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="65"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="card-icon">🤖</div>
-        <h3>Bot &amp; Backend Dev</h3>
-        <p>Built and hosted a real Telegram bot with persistence and live users.</p>
-        <div class="tags">
-          <span>Python</span><span>Telegram Bot API</span><span>Redis</span><span>Flask</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="75"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="card-icon">🧩</div>
-        <h3>Competitive Programming</h3>
-        <p>Actively practicing and improving problem-solving speed and accuracy.</p>
-        <div class="tags">
-          <span>LeetCode</span><span>CodeChef</span><span>Problem Solving</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="55"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="card-icon">☁️</div>
-        <h3>Cloud &amp; Tools</h3>
-        <p>Currently learning cloud fundamentals and developer tooling.</p>
-        <div class="tags">
-          <span>AWS</span><span>GitHub</span><span>Linux</span><span>VS Code</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="40"></div></div>
-      </div>
-      <div class="skill-card">
-        <div class="card-icon">🌱</div>
-        <h3>Currently Learning</h3>
-        <p>Topics I'm actively investing time into this year.</p>
-        <div class="tags">
-          <span>Advanced DSA</span><span>System Design Basics</span><span>Cloud</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" data-level="35"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS (mirrors "How It Works") -->
-<section class="process" id="process">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">Process</span>
-      <h2 class="section-title">How I Build</h2>
-      <p class="section-desc">My loop for picking up a new skill or shipping a project, every single time.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-card">
-        <div class="process-num">01</div>
-        <h3>Learn</h3>
-        <p>Pick a concept or stack, study it from docs, courses or seniors' guidance.</p>
-      </div>
-      <div class="process-card">
-        <div class="process-num">02</div>
-        <h3>Practice</h3>
-        <p>Drill it through DSA problems on LeetCode/CodeChef until it's second nature.</p>
-      </div>
-      <div class="process-card">
-        <div class="process-num">03</div>
-        <h3>Build</h3>
-        <p>Turn the concept into a real project — like the Anonymous MITians bot.</p>
-      </div>
-      <div class="process-card">
-        <div class="process-num">04</div>
-        <h3>Ship &amp; Iterate</h3>
-        <p>Put it in front of real users, gather feedback, and keep improving it.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects" id="projects">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">What I've Built</span>
-      <h2 class="section-title">Projects</h2>
-      <p class="section-desc">Real software I've designed, built and shipped to actual users.</p>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-tag">Telegram Bot · Backend</div>
-        <h3>Anonymous MITians</h3>
-        <a class="code-link" href="https://github.com/kushwaha-manish" target="_blank" rel="noopener">⌥ Code</a>
-        <p>An Omegle-style anonymous Telegram bot that lets MITians chat with another random MITian without revealing their identity. Built from scratch including matching logic, a credit/referral system, persistent storage with Redis, and a keep-alive server for reliable uptime.</p>
-        <div class="tags">
-          <span>Python</span><span>Telegram Bot API</span><span>Upstash Redis</span><span>Flask</span>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-tag">Personal Site</div>
-        <h3>Portfolio Website</h3>
-        <a class="code-link" href="https://github.com/kushwaha-manish" target="_blank" rel="noopener">⌥ Code</a>
-        <p>This very site — a dark-themed, animated personal portfolio built to present my academics, skills, and projects as I grow through college, designed and coded from scratch.</p>
-        <div class="tags">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MILESTONES -->
-<section class="milestones" id="milestones">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">Journey So Far</span>
-      <h2 class="section-title">Milestones &amp; Roles</h2>
-      <p class="section-desc">Academic markers, leadership roles and the consistency that got me here.</p>
-    </div>
-
-    <div class="milestone-card">
-      <div class="milestone-icon">🏅</div>
-      <div class="milestone-body">
-        <h3>First Year CGPA — 8.14</h3>
-        <p class="milestone-sub">MIT ADT University · B.Tech CSE</p>
-        <div class="tags">
-          <span>Top Performer</span><span>Year 1</span>
-        </div>
-        <p>Closed my first year of engineering with an 8.14 CGPA while adjusting to a new academic environment and building consistent study habits.</p>
-      </div>
-    </div>
-
-    <div class="milestone-card">
-      <div class="milestone-icon">🎓</div>
-      <div class="milestone-body">
-        <h3>Class Representative — Year 1 &amp; Year 2</h3>
-        <p class="milestone-sub">MIT ADT University</p>
-        <div class="tags">
-          <span>Leadership</span><span>2 Years Running</span>
-        </div>
-        <p>Selected as CR for two consecutive years, acting as the communication bridge between students and faculty and helping coordinate class activities.</p>
-      </div>
-    </div>
-
-    <div class="milestone-card">
-      <div class="milestone-icon">🌐</div>
-      <div class="milestone-body">
-        <h3>Campus Ambassador</h3>
-        <p class="milestone-sub">AIBL · AI for Better Life</p>
-        <div class="tags">
-          <span>AI Advocacy</span><span>Campus Outreach</span>
-        </div>
-        <p>Representing AIBL on campus, helping spread awareness about AI for social good and connecting students with the program.</p>
-      </div>
-    </div>
-
-    <div class="milestone-card">
-      <div class="milestone-icon">📘</div>
-      <div class="milestone-body">
-        <h3>10th Grade — 87%</h3>
-        <p class="milestone-sub">Class Topper</p>
-        <div class="tags">
-          <span>2022</span><span>Class Topper</span>
-        </div>
-        <p>Topped my class in 10th grade with 87%, before beginning my JEE preparation journey.</p>
-      </div>
-    </div>
-
-    <div class="milestone-card">
-      <div class="milestone-icon">🔁</div>
-      <div class="milestone-body">
-        <h3>The JEE Drop Year</h3>
-        <p class="milestone-sub">A Lesson in Consistency</p>
-        <div class="tags">
-          <span>Discipline</span><span>Growth Mindset</span>
-        </div>
-        <p>Took a year to prepare for JEE. It didn't go the way I originally planned, but it taught me the lesson I still build on today: consistency always beats talent.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LIVE MATRIX (mirrors "Detection at every layer") -->
-<div class="wave-divider"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,0 1440,40 L1440,70 L0,70 Z" fill="#0a0e1c"></path></svg></div>
-<section class="matrix">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">Live Coverage</span>
-      <h2 class="section-title">Consistency at Every Layer</h2>
-      <p class="section-desc">A snapshot of the habits I'm actively maintaining, day over day.</p>
-    </div>
-    <div class="matrix-stats">
-      <div class="matrix-stat">
-        <div class="stat-num" data-target="100">0</div>
-        <div class="stat-label">% Effort, Every Day</div>
-      </div>
-      <div class="matrix-stat">
-        <div class="stat-num" data-target="2">0</div>
-        <div class="stat-label">Platforms — LeetCode + CodeChef</div>
-      </div>
-      <div class="matrix-stat">
-        <div class="stat-num" data-target="1">0</div>
-        <div class="stat-label">Bot Live in Production</div>
-      </div>
-      <div class="matrix-stat">
-        <div class="stat-num" data-target="8.14" data-decimal="true">0</div>
-        <div class="stat-label">Academic CGPA</div>
-      </div>
-    </div>
-    <div class="live-grid" id="liveGrid"></div>
-  </div>
-</section>
-<div class="wave-divider"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C360,-20 1080,70 1440,30 L1440,0 L0,0 Z" fill="#0a0e1c"></path></svg></div>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-inner">
-    <div class="section-head center">
-      <span class="eyebrow-pill">Contact</span>
-      <h2 class="section-title">Let's Build Something Great</h2>
-      <p class="section-desc accent-text">Open to internships, project collaborations, hackathons and software development opportunities.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <a class="contact-card" href="mailto:manishkush743@gmail.com">
-          <div class="card-icon">✉️</div>
-          <div>
-            <h3>Email</h3>
-            <p>manishkush743@gmail.com</p>
-          </div>
+ 
+      <div class="hero-ctas">
+        <a href="#detect" class="btn-primary btn-magnetic">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Analyze Media
+          <span class="btn-glow"></span>
+          <span class="btn-ripple"></span>
         </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/kushwaha-manish-/" target="_blank" rel="noopener">
-          <div class="card-icon">in</div>
-          <div>
-            <h3>LinkedIn</h3>
-            <p>kushwaha-manish</p>
-          </div>
-        </a>
-        <a class="contact-card" href="https://github.com/kushwaha-manish" target="_blank" rel="noopener">
-          <div class="card-icon">⌥</div>
-          <div>
-            <h3>GitHub</h3>
-            <p>kushwaha-manish</p>
-          </div>
-        </a>
-        <a class="contact-card" href="#" id="resumeCard2">
-          <div class="card-icon">📄</div>
-          <div>
-            <h3>Resume</h3>
-            <p>Download Resume</p>
-          </div>
+        <a href="#get-help" class="btn-secondary btn-magnetic">
+          Get Help
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <form class="contact-form" id="contactForm">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <input type="text" placeholder="Subject">
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn btn-primary full">➤ Send Message</button>
-      </form>
+ 
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-count="98.4" data-dec="1" data-suffix="%">0%</span>
+          <span class="stat-label">Detection Accuracy</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="2.3" data-dec="1" data-suffix="s">0s</span>
+          <span class="stat-label">Avg. Analysis Time</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="50" data-dec="0" data-suffix="K+">0K+</span>
+          <span class="stat-label">Files Analyzed</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="12" data-dec="0" data-suffix="+">0+</span>
+          <span class="stat-label">Detection Layers</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="hero-scroll">
+      <span>Scroll to analyze</span>
+      <div class="scroll-pill">
+        <div class="scroll-ball"></div>
+      </div>
+    </div>
+ 
+    <!-- Wave divider -->
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,10 1200,40 C1300,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#FFFFFF"/>
+      </svg>
+    </div>
+  </section>
+ 
+  <!-- ===== DETECTION SECTION ===== -->
+  <section class="detect-section" id="detect">
+    <div class="detect-bg-blob"></div>
+    <div class="detect-bg-grid"></div>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Core Feature</div>
+        <h2 class="section-title">Upload &amp; Analyze</h2>
+        <p class="section-sub">Drop an image or video and our AI forensic engine will analyze it for deepfake signatures in seconds.</p>
+      </div>
+ 
+      <div class="detect-wrapper">
+        <!-- Upload Panel -->
+        <div class="upload-panel glass-panel panel-3d" id="uploadPanel">
+          <div class="panel-badge">
+            <span class="panel-badge-dot"></span> Upload Media
+          </div>
+ 
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" accept="image/*,video/*" hidden />
+            <div class="upload-orbit">
+              <div class="orbit-ring or1"></div>
+              <div class="orbit-ring or2"></div>
+              <div class="orbit-ring or3"></div>
+              <div class="upload-icon-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
+                  <polyline points="17 8 12 3 7 8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="12" y1="3" x2="12" y2="15" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="upload-title">Drop your file here</h3>
+            <p class="upload-hint">or <button class="upload-browse" id="browseBtn">browse to upload</button></p>
+            <p class="upload-types">JPG · PNG · MP4 · MOV · Max 50MB</p>
+          </div>
+ 
+          <!-- Preview -->
+          <div class="preview-area" id="previewArea" style="display:none">
+            <div class="preview-header">
+              <div class="preview-fname-wrap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="var(--accent)" stroke-width="2"/></svg>
+                <span class="preview-filename" id="previewFilename">filename.jpg</span>
+              </div>
+              <button class="preview-remove" id="removeFile">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <div class="preview-media-wrap">
+              <img id="previewImg" class="preview-img" src="" alt="Preview" style="display:none"/>
+              <video id="previewVideo" class="preview-img" controls style="display:none"></video>
+              <div class="preview-scan-line" id="previewScanLine"></div>
+              <div class="preview-corners">
+                <span class="pc tl"></span><span class="pc tr"></span>
+                <span class="pc bl"></span><span class="pc br"></span>
+              </div>
+              <div class="preview-overlay-badge" id="previewBadge">Ready to analyze</div>
+            </div>
+            <div class="file-meta" id="fileMeta"></div>
+          </div>
+ 
+          <button class="btn-analyze" id="analyzeBtn" disabled>
+            <svg class="analyze-icon" width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Analyze for Deepfake</span>
+            <span class="analyze-shine"></span>
+          </button>
+        </div>
+ 
+        <!-- Results Panel -->
+        <div class="results-panel glass-panel panel-3d" id="resultsPanel">
+          <div class="panel-badge" id="resPanelBadge">
+            <span class="panel-badge-dot" id="resDot"></span>
+            <span id="resPanelLabel">Analysis Results</span>
+          </div>
+ 
+          <!-- Idle -->
+          <div class="results-idle" id="resultsIdle">
+            <div class="idle-visual">
+              <div class="idle-circle ic1"></div>
+              <div class="idle-circle ic2"></div>
+              <div class="idle-circle ic3"></div>
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="position:relative;z-index:2">
+                <circle cx="11" cy="11" r="8" stroke="var(--neutral-300)" stroke-width="1.5"/>
+                <path d="M21 21l-4.35-4.35" stroke="var(--neutral-300)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="idle-title">Awaiting analysis</p>
+            <p class="idle-hint">Upload a file and click Analyze to begin</p>
+            <!-- Animated placeholder skeleton -->
+            <div class="idle-skeleton">
+              <div class="sk-line sk-wide"></div>
+              <div class="sk-line sk-mid"></div>
+              <div class="sk-line sk-narrow"></div>
+            </div>
+          </div>
+ 
+          <!-- Loading -->
+          <div class="results-loading" id="resultsLoading" style="display:none">
+            <div class="holo-scanner">
+              <canvas id="holoCanvas" width="130" height="130"></canvas>
+              <div class="holo-face">
+                <div class="holo-ring holo-r1"></div>
+                <div class="holo-ring holo-r2"></div>
+                <div class="holo-ring holo-r3"></div>
+                <svg width="52" height="52" viewBox="0 0 100 100" fill="none" style="position:relative;z-index:3">
+                  <ellipse cx="50" cy="46" rx="25" ry="30" stroke="var(--accent)" stroke-width="1.5" opacity="0.5" stroke-dasharray="5 3"/>
+                  <circle cx="40" cy="42" r="4" fill="var(--accent)" opacity="0.4"/>
+                  <circle cx="60" cy="42" r="4" fill="var(--accent)" opacity="0.4"/>
+                  <path d="M38 57 Q50 64 62 57" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="loading-steps">
+              <div class="loading-step" id="step1">
+                <div class="ls-icon"><div class="ls-dot"></div></div>
+                <div class="ls-body">
+                  <span>Extracting facial landmarks…</span>
+                  <div class="ls-track"><div class="ls-fill"></div></div>
+                </div>
+              </div>
+              <div class="loading-step" id="step2">
+                <div class="ls-icon"><div class="ls-dot"></div></div>
+                <div class="ls-body">
+                  <span>Running GAN artifact detection…</span>
+                  <div class="ls-track"><div class="ls-fill"></div></div>
+                </div>
+              </div>
+              <div class="loading-step" id="step3">
+                <div class="ls-icon"><div class="ls-dot"></div></div>
+                <div class="ls-body">
+                  <span>Analyzing frequency patterns…</span>
+                  <div class="ls-track"><div class="ls-fill"></div></div>
+                </div>
+              </div>
+              <div class="loading-step" id="step4">
+                <div class="ls-icon"><div class="ls-dot"></div></div>
+                <div class="ls-body">
+                  <span>Generating forensic report…</span>
+                  <div class="ls-track"><div class="ls-fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+ 
+          <!-- Output -->
+          <div class="results-output" id="resultsOutput" style="display:none">
+            <div class="result-verdict" id="resultVerdict">
+              <div class="verdict-icon" id="verdictIcon"></div>
+              <div>
+                <h3 class="verdict-label" id="verdictLabel"></h3>
+                <p class="verdict-desc" id="verdictDesc"></p>
+              </div>
+            </div>
+ 
+            <div class="confidence-block">
+              <div class="conf-row">
+                <span>Confidence Score</span>
+                <span class="conf-val" id="confidenceVal">—</span>
+              </div>
+              <div class="conf-track">
+                <div class="conf-fill" id="confidenceFill">
+                  <div class="conf-shine"></div>
+                </div>
+              </div>
+              <div class="conf-labels"><span>Low risk</span><span>High risk</span></div>
+            </div>
+ 
+            <!-- Mini radar chart -->
+            <div class="radar-wrap">
+              <canvas id="radarChart" width="180" height="140"></canvas>
+              <div class="radar-legend" id="radarLegend"></div>
+            </div>
+ 
+            <div class="report-block">
+              <h4 class="report-title">Forensic Observations</h4>
+              <ul class="report-list" id="reportList"></ul>
+            </div>
+ 
+            <div class="result-actions">
+              <button class="btn-view-report" id="viewReportBtn">
+                Full Report
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="btn-get-help-result" id="getHelpResult">Get Help</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="reportModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Forensic Detection Report</h3>
+        <button class="modal-close" id="modalClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
-</section>
-
-<div class="wave-divider"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,40 C360,0 1080,90 1440,40 L1440,70 L0,70 Z" fill="#0a0e1c"></path></svg></div>
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <h2>Manish <span class="accent">Kushwaha</span></h2>
-      <p>CSE Undergraduate building real things, one project at a time. Open, honest, and always learning.</p>
-      <p class="footer-note">⚙️ Built from scratch with HTML, CSS &amp; JavaScript.</p>
+ 
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-section" id="how-it-works">
+    <div class="how-bg-lines"></div>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">How Detection Works</h2>
+        <p class="section-sub">Our multi-layered AI forensic pipeline analyzes media at pixel, frequency, and behavioral levels.</p>
+      </div>
+      <div class="steps-row">
+        <div class="step-card tilt-card">
+          <div class="sc-inner">
+            <div class="sc-num">01</div>
+            <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h4>Upload Media</h4>
+            <p>Drop an image or video. We accept all major formats with full privacy.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot cd1"></div>
+          <div class="connector-dot cd2"></div>
+          <div class="connector-dot cd3"></div>
+        </div>
+        <div class="step-card tilt-card">
+          <div class="sc-inner">
+            <div class="sc-num">02</div>
+            <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="var(--accent)" stroke-width="1.8"/><path d="M12 1v2M12 21v2M1 12h2M21 12h2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h4>AI Forensic Scan</h4>
+            <p>Neural network scans GAN artifacts, facial geometry, and frequency anomalies.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot cd1"></div>
+          <div class="connector-dot cd2"></div>
+          <div class="connector-dot cd3"></div>
+        </div>
+        <div class="step-card tilt-card">
+          <div class="sc-inner">
+            <div class="sc-num">03</div>
+            <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h4>Get Your Report</h4>
+            <p>Verdict, confidence score, and plain-language forensic observations.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot cd1"></div>
+          <div class="connector-dot cd2"></div>
+          <div class="connector-dot cd3"></div>
+        </div>
+        <div class="step-card tilt-card">
+          <div class="sc-inner">
+            <div class="sc-num">04</div>
+            <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="var(--accent)" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h4>Connect for Help</h4>
+            <p>Affected? Connect with trained cybersecurity and legal students to guide you.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Horizontal scrolling tech strip -->
+      <div class="tech-strip">
+        <div class="tech-strip-inner" id="techStrip">
+          <span>GAN Detection</span><span class="ts-dot"></span>
+          <span>Facial Geometry</span><span class="ts-dot"></span>
+          <span>DCT Analysis</span><span class="ts-dot"></span>
+          <span>PRNU Forensics</span><span class="ts-dot"></span>
+          <span>Eye Blink Analysis</span><span class="ts-dot"></span>
+          <span>Texture Mapping</span><span class="ts-dot"></span>
+          <span>Audio Sync Check</span><span class="ts-dot"></span>
+          <span>EXIF Validation</span><span class="ts-dot"></span>
+          <!-- repeated for infinite scroll -->
+          <span>GAN Detection</span><span class="ts-dot"></span>
+          <span>Facial Geometry</span><span class="ts-dot"></span>
+          <span>DCT Analysis</span><span class="ts-dot"></span>
+          <span>PRNU Forensics</span><span class="ts-dot"></span>
+          <span>Eye Blink Analysis</span><span class="ts-dot"></span>
+          <span>Texture Mapping</span><span class="ts-dot"></span>
+          <span>Audio Sync Check</span><span class="ts-dot"></span>
+          <span>EXIF Validation</span><span class="ts-dot"></span>
+        </div>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Site</h4>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#process">Process</a>
+  </section>
+ 
+  <!-- ===== FEATURES ===== -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">What Makes TruthLens Different</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card feat-hero tilt-card">
+          <div class="fc-inner">
+            <div class="feat-glow-bg"></div>
+            <div class="feat-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Multi-Layer AI Analysis</h3>
+            <p>Combines facial geometry, GAN fingerprint detection, and frequency-domain forensics for industry-leading accuracy across all media types.</p>
+            <span class="feat-tag">98.4% accuracy</span>
+            <!-- mini animated chart -->
+            <div class="feat-mini-chart">
+              <div class="fmc-bar" style="height:55%;--delay:0.1s"></div>
+              <div class="fmc-bar" style="height:70%;--delay:0.2s"></div>
+              <div class="fmc-bar" style="height:45%;--delay:0.3s"></div>
+              <div class="fmc-bar" style="height:85%;--delay:0.4s"></div>
+              <div class="fmc-bar" style="height:65%;--delay:0.5s"></div>
+              <div class="fmc-bar" style="height:90%;--delay:0.6s"></div>
+              <div class="fmc-bar" style="height:72%;--delay:0.7s"></div>
+            </div>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="feature-card tilt-card">
+          <div class="fc-inner">
+            <div class="feat-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="var(--accent)" stroke-width="1.8"/><polyline points="14 2 14 8 20 8" stroke="var(--accent)" stroke-width="1.8"/></svg></div>
+            <h3>Plain-English Reports</h3>
+            <p>No jargon. Every detection result explained so anyone can understand it.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="feature-card tilt-card">
+          <div class="fc-inner">
+            <div class="feat-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--accent)" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Instant Results</h3>
+            <p>Analysis completes in under 3 seconds. No waiting, no queues, no sign-up.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="feature-card tilt-card">
+          <div class="fc-inner">
+            <div class="feat-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--accent)" stroke-width="1.8"/></svg></div>
+            <h3>Privacy First</h3>
+            <p>Files processed in-browser, never stored on our servers. Your media is yours.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="feature-card tilt-card">
+          <div class="fc-inner">
+            <div class="feat-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="var(--accent)" stroke-width="1.8"/><line x1="23" y1="11" x2="17" y2="11" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><line x1="20" y1="8" x2="20" y2="14" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h3>Community Support</h3>
+            <p>Affected by a deepfake? Connect with vetted students who can guide you through next steps.</p>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Work</h4>
-      <a href="#projects">Projects</a>
-      <a href="#milestones">Milestones</a>
-      <a href="#contact">Contact</a>
+  </section>
+ 
+  <!-- ===== 3D STATS SECTION (new) ===== -->
+  <section class="stats3d-section" id="stats3d">
+    <div class="stats3d-bg">
+      <canvas id="stats3dCanvas"></canvas>
     </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <a href="https://www.linkedin.com/in/kushwaha-manish-/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/kushwaha-manish" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:manishkush743@gmail.com">Email</a>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label" style="color:#93C5FD">Forensic Coverage</div>
+        <h2 class="section-title" style="color:#fff">Detection at Every Layer</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.55)">Our pipeline runs 12 simultaneous analysis modules on every file.</p>
+      </div>
+      <div class="stats3d-grid">
+        <div class="s3d-card tilt-card" style="--i:0">
+          <div class="s3d-inner">
+            <div class="s3d-icon-ring">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#60A5FA" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="s3d-num" data-count="98.4" data-dec="1" data-suffix="%">0%</div>
+            <div class="s3d-label">Overall Accuracy</div>
+            <div class="s3d-bar-wrap"><div class="s3d-bar" style="--w:98%"></div></div>
+          </div>
+          <div class="tilt-shine"></div>
+        </div>
+        <div class="s3d-card tilt-card" style="--i:1">
+          <div class="s3d-inner">
+            <div class="s3d-icon-ring">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#34D399" stroke-width="1.8"/></svg>
+            </div>
+            <div class="s3d-num" data-count="99.1" data-dec="1" data-suffix="%">0%</div>
+            <div class="s3d-label">GAN Detection</div>
+            <div class="s3d-bar-wrap"><div class="s3d-bar green-bar" style="--w:99%"></div></div>
+          </div>
+          <div class="tilt-shine"></div>
+        </div>
+        <div class="s3d-card tilt-card" style="--i:2">
+          <div class="s3d-inner">
+            <div class="s3d-icon-ring">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#F59E0B" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <div class="s3d-num" data-count="96.7" data-dec="1" data-suffix="%">0%</div>
+            <div class="s3d-label">Facial Geometry</div>
+            <div class="s3d-bar-wrap"><div class="s3d-bar amber-bar" style="--w:97%"></div></div>
+          </div>
+          <div class="tilt-shine"></div>
+        </div>
+        <div class="s3d-card tilt-card" style="--i:3">
+          <div class="s3d-inner">
+            <div class="s3d-icon-ring">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z" stroke="#F472B6" stroke-width="1.8" stroke-linecap="round"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="#F472B6" stroke-width="1.2" opacity="0.5"/></svg>
+            </div>
+            <div class="s3d-num" data-count="94.2" data-dec="1" data-suffix="%">0%</div>
+            <div class="s3d-label">Freq. Analysis</div>
+            <div class="s3d-bar-wrap"><div class="s3d-bar pink-bar" style="--w:94%"></div></div>
+          </div>
+          <div class="tilt-shine"></div>
+        </div>
+      </div>
+ 
+      <!-- Animated detection matrix (new) -->
+      <div class="detection-matrix" id="detectionMatrix">
+        <div class="dm-label">Live Detection Matrix</div>
+        <canvas id="matrixCanvas" width="800" height="100"></canvas>
+      </div>
     </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="copyright">© 2026 Manish Kushwaha. All rights reserved.</p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  </section>
+ 
+  <!-- ===== GET HELP ===== -->
+  <section class="help-section" id="get-help">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Support</div>
+        <h2 class="section-title">Need Help?</h2>
+        <p class="section-sub">Whether you're confused by a result or think you're affected — we've got trained people ready to guide you.</p>
+      </div>
+ 
+      <div class="help-flow glass-panel" id="helpFlow">
+        <div class="help-step active" id="helpStep1">
+          <h3 class="help-step-title">What can we help you with?</h3>
+          <div class="help-options">
+            <button class="help-option" data-type="understand">
+              <div class="ho-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--accent)" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg></div>
+              <div class="ho-text"><strong>I don't understand the result</strong><span>Help me interpret what the report means</span></div>
+              <svg class="ho-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <button class="help-option" data-type="affected">
+              <div class="ho-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--danger)" stroke-width="1.8"/><line x1="12" y1="9" x2="12" y2="13" stroke="var(--danger)" stroke-width="2" stroke-linecap="round"/></svg></div>
+              <div class="ho-text"><strong>I think I'm affected by a deepfake</strong><span>Someone may have used my face without consent</span></div>
+              <svg class="ho-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <button class="help-option" data-type="guidance">
+              <div class="ho-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="var(--accent)" stroke-width="1.8"/></svg></div>
+              <div class="ho-text"><strong>I want general guidance</strong><span>Learn what to do about deepfake threats</span></div>
+              <svg class="ho-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+ 
+        <div class="help-step" id="helpStep2" style="display:none">
+          <button class="help-back" id="helpBack">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Back
+          </button>
+          <div class="guidance-content" id="guidanceContent"></div>
+          <p class="connect-prompt">Want personalised guidance? Connect with one of our student experts below ↓</p>
+        </div>
+      </div>
+ 
+      <div class="helpers-grid">
+        <div class="helper-card tilt-card">
+          <div class="hc-inner">
+            <div class="hc-avatar av-1">AK</div>
+            <div class="hc-info">
+              <h4>Arjun Khanna</h4>
+              <span class="hc-role role-cyber">Cybersecurity</span>
+              <p>Specializes in GAN detection research and digital evidence. 40+ users assisted.</p>
+            </div>
+            <div class="hc-footer">
+              <span class="avail-dot"></span>
+              <span class="avail-label">Available now</span>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="helper-card tilt-card">
+          <div class="hc-inner">
+            <div class="hc-avatar av-2">PS</div>
+            <div class="hc-info">
+              <h4>Priya Sharma</h4>
+              <span class="hc-role role-forensics">Digital Forensics</span>
+              <p>Trained in media authentication and metadata analysis. Helps interpret forensic reports.</p>
+            </div>
+            <div class="hc-footer">
+              <span class="avail-dot"></span>
+              <span class="avail-label">Available now</span>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+        <div class="helper-card tilt-card">
+          <div class="hc-inner">
+            <div class="hc-avatar av-3">RM</div>
+            <div class="hc-info">
+              <h4>Rahul Mehta</h4>
+              <span class="hc-role role-law">Cyber Law</span>
+              <p>Law student focused on digital rights and non-consensual deepfake legislation.</p>
+            </div>
+            <div class="hc-footer">
+              <span class="avail-dot avail-away"></span>
+              <span class="avail-label">Available in 2h</span>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="tilt-shine"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== STUDENTS ===== -->
+  <section class="students-section" id="students">
+    <div class="students-bg-mesh"></div>
+    <div class="container">
+      <div class="students-inner">
+        <div class="students-copy">
+          <div class="section-label">For Students</div>
+          <h2 class="section-title-left">Gain Real-World<br/>Experience</h2>
+          <p>TruthLens connects students in cybersecurity, digital forensics, and cyber law with real users who need help with deepfake threats.</p>
+          <ul class="student-benefits">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/></svg>Work on real deepfake cases — not textbook examples</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/></svg>Build a verified portfolio of community contributions</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/></svg>Collaborate with peers from different disciplines</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/></svg>Get certified hours toward academic credit</li>
+          </ul>
+          <a href="#" class="btn-primary btn-magnetic">
+            Join as a Student Helper
+            <span class="btn-glow"></span>
+          </a>
+        </div>
+        <div class="students-cards-col">
+          <div class="student-card tilt-card sc-1">
+            <div class="scc-inner">
+              <div class="scc-avatar">RJ</div>
+              <div class="scc-info">
+                <h4>Riya Joshi</h4>
+                <span class="scc-field">B.Tech Cybersecurity, 3rd Year</span>
+                <p>Analyzing GAN-generated content and helping users interpret forensic reports.</p>
+              </div>
+              <div class="scc-footer">
+                <span class="sc-cases">12 cases</span>
+                <span class="sc-avail"><span class="avail-dot"></span> Available</span>
+              </div>
+              <div class="tilt-shine"></div>
+            </div>
+          </div>
+          <div class="student-card tilt-card sc-2">
+            <div class="scc-inner">
+              <div class="scc-avatar">VS</div>
+              <div class="scc-info">
+                <h4>Vikram Singh</h4>
+                <span class="scc-field">MSc Digital Forensics, 1st Year</span>
+                <p>Specializing in video authentication and metadata forensics.</p>
+              </div>
+              <div class="scc-footer">
+                <span class="sc-cases">8 cases</span>
+                <span class="sc-avail"><span class="avail-dot"></span> Available</span>
+              </div>
+              <div class="tilt-shine"></div>
+            </div>
+          </div>
+          <div class="student-card tilt-card sc-3">
+            <div class="scc-inner">
+              <div class="scc-avatar">NA</div>
+              <div class="scc-info">
+                <h4>Nisha Agarwal</h4>
+                <span class="scc-field">LLB Cyber Law, 2nd Year</span>
+                <p>Guides users through legal remedies and digital rights protection.</p>
+              </div>
+              <div class="scc-footer">
+                <span class="sc-cases">5 cases</span>
+                <span class="sc-avail"><span class="avail-dot avail-away"></span> In 3h</span>
+              </div>
+              <div class="tilt-shine"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy">
+          <div class="section-label">About</div>
+          <h2 class="section-title-left">What Are<br/>Deepfakes?</h2>
+          <p>Deepfakes are AI-generated media where someone's face or voice is synthetically replaced — often so convincingly it's impossible to detect with the naked eye.</p>
+          <p>They're being used for misinformation, fraud, and identity theft. Knowing what's real has never mattered more.</p>
+          <div class="mission-cards">
+            <div class="mission-card tilt-card">
+              <div class="mc-inner">
+                <div class="mc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="var(--accent)" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                <div><strong>Detect</strong><p>Accurate AI forensics for images and video</p></div>
+                <div class="tilt-shine"></div>
+              </div>
+            </div>
+            <div class="mission-card tilt-card">
+              <div class="mc-inner">
+                <div class="mc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                <div><strong>Educate</strong><p>Plain-language reports anyone can understand</p></div>
+                <div class="tilt-shine"></div>
+              </div>
+            </div>
+            <div class="mission-card tilt-card">
+              <div class="mc-inner">
+                <div class="mc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="var(--accent)" stroke-width="1.8"/></svg></div>
+                <div><strong>Connect</strong><p>Link affected users with trained student helpers</p></div>
+                <div class="tilt-shine"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual" id="aboutVisual">
+          <div class="astack" id="astack">
+            <div class="acard a-back"></div>
+            <div class="acard a-mid"></div>
+            <div class="acard a-front">
+              <div class="acard-header">
+                <div class="acard-dot red"></div>
+                <div class="acard-dot yellow"></div>
+                <div class="acard-dot green"></div>
+                <span>forensic_report.json</span>
+              </div>
+              <div class="acard-body">
+                <div class="ac-line"><span class="jk">"verdict":</span> <span class="jv jr">"DEEPFAKE"</span></div>
+                <div class="ac-line"><span class="jk">"confidence":</span> <span class="jv jn">94.2</span></div>
+                <div class="ac-line"><span class="jk">"observations":</span> [</div>
+                <div class="ac-line ind"><span class="js">"Facial boundary artifacts"</span></div>
+                <div class="ac-line ind"><span class="js">"Eye blinking anomaly"</span></div>
+                <div class="ac-line ind"><span class="js">"GAN fingerprint detected"</span></div>
+                <div class="ac-line">]</div>
+                <div class="ac-line"><span class="jk">"model":</span> <span class="js">"TruthLens v2.1"</span></div>
+              </div>
+              <!-- Animated typing cursor -->
+              <div class="acard-cursor"></div>
+            </div>
+            <div class="a-badge ab-fake"><span class="acard-dot red"></span>Deepfake</div>
+            <div class="a-badge ab-real"><span class="acard-dot green"></span>Authentic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top-wave">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z" fill="#111827"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="footer-logo">
+            <span class="logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--accent)" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="var(--accent)"/></svg></span>
+            TruthLens
+          </a>
+          <p>AI-powered deepfake detection for everyone. Free, private, and instant.</p>
+          <p class="footer-disclaimer">⚠️ UI simulation for educational purposes only.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="#detect">Analyze Media</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Features</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Community</h5>
+          <ul>
+            <li><a href="#get-help">Get Help</a></li>
+            <li><a href="#students">Join as Student</a></li>
+            <li><a href="#about">About Deepfakes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><a href="#">Detection Guide</a></li>
+            <li><a href="#">Report a Deepfake</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 TruthLens. Built for awareness and education.</span>
+        <span class="footer-note">Results are simulated — not a substitute for professional forensic review.</span>
+      </div>
+    </div>
+  </footer>
+ 
+  <script src="script.js"></script>
 </body>
 </html>
+ 
